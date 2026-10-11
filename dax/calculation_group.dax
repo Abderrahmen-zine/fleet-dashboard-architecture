@@ -1,0 +1,21 @@
+-- Calculation group: Time Intelligence
+
+-- Item: Current
+SELECTEDMEASURE ()
+
+-- Item: YTD
+CALCULATE ( SELECTEDMEASURE (), DATESYTD ( DimDate[Date] ) )
+
+-- Item: PY
+CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( DimDate[Date] ) )
+
+-- Item: YoY
+VAR Cur = SELECTEDMEASURE ()
+VAR PY  = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( DimDate[Date] ) )
+RETURN IF ( NOT ISBLANK ( PY ), Cur - PY )
+
+-- Item: YoY %
+-- Format string expression: "0.0%"
+VAR Cur = SELECTEDMEASURE ()
+VAR PY  = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( DimDate[Date] ) )
+RETURN DIVIDE ( Cur - PY, PY )

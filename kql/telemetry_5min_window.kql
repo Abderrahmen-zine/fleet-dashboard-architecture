@@ -1,0 +1,9 @@
+// Five-minute telemetry windows per vehicle (last hour)
+VehicleTelemetry
+| where Timestamp > ago(1h)
+| summarize AvgEngineTemp = round(avg(EngineTemp), 1),
+            MaxEngineTemp = max(EngineTemp),
+            MinFuelLevel  = min(FuelLevel),
+            LastPosition  = arg_max(Timestamp, Latitude, Longitude)
+    by VehicleID, Window = bin(Timestamp, 5m)
+| order by Window desc, VehicleID asc

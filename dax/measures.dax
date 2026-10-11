@@ -1,0 +1,11 @@
+Avg Delivery Time =
+VAR TotalMinutes = SUM ( FactDeliveries[DeliveryTime] )
+VAR Deliveries   = COUNTROWS ( FactDeliveries )
+RETURN DIVIDE ( TotalMinutes, Deliveries )
+
+Total Distance = SUM ( FactDeliveries[Distance] )
+
+Avg Fuel Efficiency =
+VAR Km   = SUM ( FactDeliveries[Distance] )
+VAR Fuel = SUM ( FactDeliveries[FuelUsed] )
+RETURN DIVIDE ( Km, Fuel )

@@ -1,0 +1,5 @@
+Metric Selector = {
+    ("Avg Delivery Time",    NAMEOF('Measures'[Avg Delivery Time]),    0),
+    ("Total Distance",       NAMEOF('Measures'[Total Distance]),       1),
+    ("Avg Fuel Efficiency",  NAMEOF('Measures'[Avg Fuel Efficiency]),  2)
+}
